@@ -13,7 +13,6 @@
 	<script>
 		var z = 0;
 		var coin_array_sorted = [];
-		var temporary_coin_array = [];
 		$.ajax({
 			type: "GET",
 			url: "http://data.sparkfun.com/output/YGpX4Ovo8MHy50aqMVpg.json",
@@ -21,11 +20,13 @@
 				console.log(response);
 				var len0 = response.length;
 				while (z<len0){
+					var temporary_coin_array = [];
 					temporary_coin_array.push([response[z].coin1, Number(response[z].coin1val)]);
 					temporary_coin_array.push([response[z].coin2, Number(response[z].coin2val)]);
 					temporary_coin_array.push([response[z].coin3, Number(response[z].coin3val)]);
 					temporary_coin_array.push([response[z].coin4, Number(response[z].coin4val)]);
 					temporary_coin_array.push([response[z].coin5, Number(response[z].coin5val)]);
+					console.log(temporary_coin_array);
 					coin_array_sorted.push(temporary_coin_array);
 					z=z+1;
 				}
