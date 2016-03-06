@@ -9,7 +9,7 @@
 	<h1>Leaderboard</h1>
 	<br><br>
 	<h2>Please enter your name and score:</h2>
-	Name: <input type="text" id="name"/>
+	Name: <input type="text" id="nameinput"/>
 	<br>
 	Score: <input type="number" id="score">
 	<br>
@@ -17,12 +17,27 @@
 	<table>
 	</table>
 	<script>
+		var n = 0;
 		var scores = [];
 		var names = [];
+		$.ajax({
+			type: "GET",
+			url: "http://data.sparkfun.com/output/YGpX4Ovo8MHy50aqMVpg.json",
+			success: (response) => {
+				console.log(response);
+				var len0 = response.length;
+				while (n<len0){
+					names.push(response[n].name);
+					scores.push(Number(response[n].score));
+					n=n+1;
+				}
+				console.log("names is "+names+" and scores is "+scores);
+			}
+		})
 		var x=1;
 		var i=0;
 		$("button").click(function(){
-			var name = $("#name").val();
+			var name = $("#nameinput").val();
 			var score = Number($("#score").val());
 			if (score<50){
 				alert("You need a score of 50 or higher to get onto the leaderboard! Better luck next time!");
@@ -30,6 +45,18 @@
 				var a=1;
 				scores.push(score);
 				names.push(name);
+				$.ajax({
+					url: 'http://data.sparkfun.com/input/YGpX4Ovo8MHy50aqMVpg',
+					headers: {
+						'Phant-Private-Key':'RbEwj08doMUk67ZjnoWe'
+					},
+					method: 'POST',
+					dataType: 'json',
+					data: { name: name, score: score},
+					success: function(data) {
+						console.log('success: ' + data);
+					}
+				})
 				var len = scores.length;
 				x = len-1;
 				while (x>0){
