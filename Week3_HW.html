@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Apis!</title>
+		<link rel="stylesheet" type="text/css" href="fancy.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link rel="icon" type="image/ico" href="https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg">
+	</head>
+	<body>
+		<table>
+			<tr><td>Api Name: </td><td><textarea id="name"></textarea></td></tr>
+			<tr><td>Api Link (full link please): </td><td><textarea id="link"></textarea></td></tr>
+			<tr><td>What it does: </td><td><textarea id="functions"></textarea></td></tr>
+			<tr><td>What you want to learn about it: </td><td><textarea id="user_interest"></textarea></td></tr>
+		</table>
+		<button class="button1" id="save"><b>Save</b></button>
+		<p></p>
+		<button class="button1" id="view"><b>View your previous entries</b></button>
+		<table id="posted"></table>
+		<script>
+			$("button#save").click(function(){
+				var name = $("#name").val();
+				var link = $("#link").val();
+				var functions = $("#functions").val();
+				var user_interest = $("#user_interest").val();
+				console.log("name is "+name+", link is "+link+", functions is "+functions+", and user_interest is "+user_interest);
+				$.ajax({
+					url: 'http://data.sparkfun.com/input/EJrGV6wblAfAXbg0jZdw',
+					headers: {
+						'Phant-Private-Key':'dqYWK4ZyBmcBnGEkAmDv'
+					},
+					method: 'POST',
+					dataType: 'json',
+					data: { name: name, link: link, uses: functions, user_interest: user_interest},
+					success: function(data) {
+						console.log('success: ' + data);
+						$("p").html("Saved!");
+					}
+				})
+			})
+			$("button#view").click(function(){
+				var x = 0;
+				$.ajax({
+					url: "http://data.sparkfun.com/output/EJrGV6wblAfAXbg0jZdw.json",
+					method: "GET",
+					success: (response) => {
+						var len = response.length;
+						$("table#posted").html("<th>Name</th><th>Link</th><th>Functions</th><th>User Interest</th>");
+						while (x<len){
+							$("table#posted").append("<tr><td>"+response[x].name+"</td><td><a href=\""+response[x].link+"\">"+response[x].name+"</a></td><td>"+response[x].uses+"</td><td>"+response[x].user_interest+"</td></tr>");
+							x=x+1;
+						}
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

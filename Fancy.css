@@ -1,0 +1,17 @@
+.button1 {
+	background-color:green;
+	border-radius:10px;
+	border:1px solid blue;
+	box-shadow:3px 3px 0px 0px blue;
+	cursor:pointer;
+	color:white;
+	padding:10px 20px;
+}
+.button1:hover {
+	background-color:red;
+}
+.button1:active {
+	position:relative;
+	top:1px;
+	box-shadow:1px 1px 0px 0px blue;
+}
