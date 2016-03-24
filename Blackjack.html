@@ -157,7 +157,6 @@
 					console.log(response);
 					document.getElementById("comp1").setAttribute("src","http://www.cheatersolitaire.com/Classic/RedBack.png");
 					document.getElementById("comp2").setAttribute("src",response.cards[1].image);
-					sleepforsleep(1000);
 					compcard1val = response.cards[0].value;
 					compcard2val = response.cards[1].value;
 					compcard1image = response.cards[0].image
@@ -178,32 +177,30 @@
 					comptotal = Number(compcard1val) + Number(compcard2val);
 					console.log(comptotal);
 					sleepforsleep(1000);
-					while(compunder16<9){
-						if (comptotal>=16||((comptotal+10)>=16&&compchange>0)||((comptotal+20)>=16&&compchange>1)){
-							compunder16 = 9;
-						} else {
-							$.ajax({
-								type:"GET",
-								url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
-								success: (response) => {
-									var compcardval = response.cards[0].value;
-									if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
-										compcardval=10;
-									}
-									if (compcardval=="ACE"){
-										compcardval=1;
-										compchange= compchange+1;
-									}
-									var compcardimage = response.cards[0].image;
-									var compcardnumwithcomp = "comp"+compcardnum;
-									console.log(compcardnumwithcomp);
-									document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
-									comptotal = comptotal + Number(compcardval);
-									compcardnum = compcardnum + 1;
+					console.log("compchange is "+compchange);
+					while(comptotal<16||((comptotal+10)<16&&compchange<=0)||((comptotal+20)<16&&compchange<=1)){
+						$.ajax({
+							type:"GET",
+							url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+							success: (response) => {
+								console.log(response);
+								var compcardval = response.cards[0].value;
+								if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
+									compcardval=10;
 								}
-							})
-						}
-						sleep(1000);
+								if (compcardval=="ACE"){
+									compcardval=1;
+									compchange= compchange+1;
+								}
+								var compcardimage = response.cards[0].image;
+								var compcardnumwithcomp = "comp"+compcardnum;
+								console.log(compcardnumwithcomp);
+								document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
+								comptotal = comptotal + Number(compcardval);
+								console.log("comptotal is "+comptotal);
+								compcardnum = compcardnum + 1;
+							}
+						})
 					}
 					if (compchange>0){
 						if (compchange>1){
@@ -224,7 +221,11 @@
 							}
 						}
 					} else {
-						compresult = comptotal;
+						if (comptotal>21){
+							compresult = 0;
+						} else {
+							compresult = comptotal;
+						}
 					}
 					console.log("comptotal is "+comptotal);
 					console.log("compresult is "+compresult);
@@ -302,16 +303,6 @@
 					}
 				}
 			})
-		}
-		function sleep(milliseconds) {
-			var start = new Date().getTime();
-			for (var i = 0; i < 1000000000000000000; i++) {
-				if ((new Date().getTime() - start) > milliseconds){
-					break;
-				}
-			}
-			compunder16 = compunder16+1;
-			console.log("Sleep");
 		}
 		function sleepforsleep(milliseconds) {
 			var start = new Date().getTime();
