@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="Fancy.css">
+	<link rel="stylesheet" type="text/css" href="Flip.css">
+	<link rel="icon" type="image/ico" href="http://deckofcardsapi.com/static/img/favicon/favicon-16x16.png">
+	<title>Blackjack!</title>
+</head>
+<body>
+	<p><span id="x">You have no cards at the moment.</span><span id="card-total"></span></p>
+	<div class="flip-container" id="myCard" ontouchstart="this.classList.toggle('hover');">
+		<div class="flipper">
+			<div class="front">
+				<img  id="blank" src="" width="100%">
+			</div>
+			<div class="back">
+			 <img id="1" src="" width="100%">
+			</div>
+		</div>
+	</div>
+	Hover over your face down card to see it!<br>
+	<img id="2" src="" width="113px">
+	<img id="3" src="" width="113px">
+	<img id="4" src="" width="113px">
+	<img id="5" src="" width="113px">
+	<img id="6" src="" width="113px">
+	<img id="7" src="" width="113px">
+	<img id="8" src="" width="113px">
+	<img id="9" src="" width="113px">
+	<img id="10" src="" width="113px">
+	<img id="11" src="" width="113px">
+	<br>
+	<button class="button1" id="get">Draw some cards</button>
+	<p id="hitorstay"></p>
+	<p id="buttonplace"></p>
+	<br>
+	<h1>Your opponent(the dealer)</h1>
+	<img id="comp1" src="" width="113px">
+	<img id="comp2" src="" width="113px">
+	<img id="comp3" src="" width="113px">
+	<img id="comp4" src="" width="113px">
+	<img id="comp5" src="" width="113px">
+	<img id="comp6" src="" width="113px">
+	<img id="comp7" src="" width="113px">
+	<img id="comp8" src="" width="113px">
+	<img id="comp9" src="" width="113px">
+	<img id="comp10" src="" width="113px">
+	<img id="comp11" src="" width="113px">
+	<script>
+		var playerresult = 0;
+		var compchange = "no";
+		var comptotal = 0;
+		var compcard1image;
+		var compcardnum = 3;
+		var compunder16 = 0;
+		var compresult;
+		var total;
+		var change = 0;
+		var cardnum = 3;
+		$.ajax({
+			type: "GET",
+			url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/shuffle/",
+			success: (response) => {
+				console.log(response);
+			}
+		})
+		$("button#get").click(function(){
+			$.ajax({
+				type: "GET",
+				url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=2",
+				success: (response) => {
+					console.log(response);
+					$("span#x").html("You have some cards now. ");
+					document.getElementById("blank").setAttribute("src", "http://www.cheatersolitaire.com/Classic/RedBack.png");
+					document.getElementById("1").setAttribute("src", response.cards[0].image);
+					document.getElementById("2").setAttribute("src", response.cards[1].image);
+					var card1val = response.cards[0].value;
+					var card2val = response.cards[1].value;
+					if (card1val==0||card1val=="JACK"||card1val=="QUEEN"||card1val=="KING"){
+						card1val = 10;
+					}
+					if (card1val=="ACE"){
+						card1val = 1;
+						change = change + 1;
+					}
+					if (card2val==0||card2val=="JACK"||card2val=="QUEEN"||card2val=="KING"){
+						card2val = 10;
+					}
+					if (card2val=="ACE"){
+						card2val = 1;
+						change = change + 1;
+					}
+					total = Number(card1val) + Number(card2val);
+					if (change==0){
+						$("span#card-total").html("Your card total is "+total);
+					} else if (change==1){
+						$("span#card-total").html("Your card total is "+total+" or "+(total+10));
+					} else if (change==2){
+						$("span#card-total").html("Your card total is "+total+" or "+(total+10)+" or "+(total+20));
+					}
+					$("#get").remove();
+					$("p#hitorstay").html("Hit or stay?")
+
+					//The first button (hit)
+					var btn = document.createElement("BUTTON");
+					var t = document.createTextNode("Hit");
+					btn.appendChild(t);
+					btn.setAttribute("onclick", "hit();");
+					btn.setAttribute("id","hit");
+					btn.setAttribute("class", "button2");
+					document.getElementById("buttonplace").appendChild(btn);
+
+					//The second button (stay)
+					var btn2 = document.createElement("BUTTON");
+					var t2 = document.createTextNode("Stay");
+					btn2.appendChild(t2);
+					btn2.setAttribute("onclick", "stay();");
+					btn2.setAttribute("id","stay");
+					btn2.setAttribute("class","button2");
+					document.getElementById("buttonplace").appendChild(btn2);
+				}
+			})
+		})
+		function stay(){
+			console.log("Stay was clicked");
+			$("#stay").remove();
+			$("#hit").remove();
+			$("#hitorstay").html("");
+			if (change>0){
+				if (change>1){
+					if ((total+20)>21){
+						if (total+10>21){
+							playerresult = total;
+						} else {
+							playerresult = total+10;
+						}
+					} else {
+						playerresult = total + 20;
+					}
+				} else {
+					if (total+10>21){
+						playerresult = total;
+					} else {
+						playerresult = total+10;
+					}
+				}
+			} else {
+				playerresult = total;
+			}
+			console.log("Playerresult is "+playerresult);
+			$.ajax({
+				type: "GET",
+				url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=2",
+				success: (response) => {
+					console.log(response);
+					document.getElementById("comp1").setAttribute("src","http://www.cheatersolitaire.com/Classic/RedBack.png");
+					document.getElementById("comp2").setAttribute("src",response.cards[1].image);
+					compcard1val = response.cards[0].value;
+					compcard2val = response.cards[1].value;
+					compcard1image = response.cards[0].image
+					if (compcard1val==0||compcard1val=="JACK"||compcard1val=="QUEEN"||compcard1val=="KING"){
+						compcard1val=10;
+					}
+					if (compcard1val=="ACE"){
+						compcard1val=1;
+						compchange="yes"
+					}
+					if (compcard2val==0||compcard2val=="JACK"||compcard2val=="QUEEN"||compcard2val=="KING"){
+						compcard2val=10;
+					}
+					if (compcard2val=="ACE"){
+						compcard2val=1;
+						compchange="yes"
+					}
+					comptotal = Number(compcard1val) + Number(compcard2val);
+					console.log(comptotal);
+					while(compunder16<9){
+						if (comptotal>=16||((comptotal+10)>=16&&compchange=="yes")){
+							if (comptotal>=16){
+								if(comptotal>21){
+									compresult=0;
+								} else if (comptotal<=21){
+									compresult=comptotal;
+								}
+								compunder16=9;
+							} else if ((comptotal+10)>=16&&compchange=="yes") {
+								if ((comptotal+10)<=21){
+									compresult=comptotal+10;
+									compunder16=9;
+								} else if ((comptotal+10)>21){
+									while(comptotal<16){
+										$.ajax({
+											type: "GET",
+											url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+											success: (response) => {
+												var compcardval = response.cards[0].value;
+												if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
+													compcardval=10;
+												}
+												if (compcardval=="ACE"){
+													compcardval=1;
+												var compcardimage = response.cards[0].image;
+												var compcardnumwithcomp = "comp" + compcardnum
+												document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
+												comptotal = comptotal + Number(compcardval);
+												}
+											}
+										})
+									}
+									compresult = total;
+									compunder16 = 9;
+								}
+							}
+						} else {
+							$.ajax({
+								type:"GET",
+								url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+								success: (response) => {
+									var compcardval = response.cards[0].value;
+									if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
+										compcardval=10;
+									}
+									if (compcardval=="ACE"){
+										compcardval=1;
+										compchange= "yes"
+									var compcardimage = response.cards[0].image;
+									var compcardnumwithcomp = "comp"+compcardnum;
+									document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
+									comptotal = comptotal + Number(compcardval);
+									compcardnum = compcardnum + 1;
+									}
+									if (comptotal>=16||((comptotal+10)>=16&&compchange=="yes")){
+										if (comptotal>=16){
+											if(comptotal>21){
+												compresult=0;
+											} else if (comptotal<=21){
+												compresult=comptotal;
+											}
+											compunder16=9;
+										} else if ((comptotal+10)>=16&&compchange=="yes") {
+											if ((comptotal+10)<=21){
+												compresult=comptotal+10;
+												compunder16=9;
+											} else if ((comptotal+10)>21){
+												while(comptotal<16){
+													$.ajax({
+														type: "GET",
+														url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+														success: (response) => {
+															var compcardval = response.cards[0].value;
+															if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
+																compcardval=10;
+															}
+															if (compcardval=="ACE"){
+																compcardval=1;
+															var compcardimage = response.cards[0].image;
+															var compcardnumwithcomp = "comp" + compcardnum
+															document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
+															comptotal = comptotal + Number(compcardval);
+															}
+														}
+													})
+												}
+												compresult = comptotal;
+												compunder16 = 9;
+											}
+										}
+									}
+								}
+							})
+						}
+						compunder16 = compunder16 + 1;
+					}
+					document.getElementById("comp1").setAttribute("src",compcard1image);
+					setTimeout(function(){
+						if (compresult>playerresult){
+							var thing4 = confirm("You lose! Play again?");
+							if (thing4==true){
+								location.reload();
+							} else {
+								throw new Error('This is not an error. This is just to abort javascript');
+							}
+						}
+						if (compresult<playerresult){
+							var thing5 = confirm("You win! Play again?");
+							if (thing5==true){
+								location.reload();
+							} else {
+								throw new Error('This is not an error. This is just to abort javascript');
+							}
+						}
+						if (compresult==playerresult){
+							var thing6 = confirm("You tied! Play again?");
+							if (thing6==true){
+								location.reload();
+							} else {
+								throw new Error('This is not an error. This is just to abort javascript');
+							}
+						}
+					},500)
+				}
+			})
+		}
+		function hit(){
+			console.log("Hit was clicked");
+			$.ajax({
+				type: "GET",
+				url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+				success: (response) => {
+					console.log(response);
+					var image = response.cards[0].image;
+					document.getElementById(cardnum).setAttribute("src",image);
+					cardnum = cardnum+1;
+					var value = response.cards[0].value;
+					if (value==0||value=="KING"||value=="QUEEN"||value=="JACK"){
+						value = 10;
+					}
+					if (value=="ACE"){
+						value = 1;
+						change = change + 1;
+					}
+					console.log(value);
+					total = total + Number(value);
+					console.log(total);
+					var totalwithors="";
+					var y = 0;
+					while(y<(change+1)){
+						if (y<(change+1)&&y>0){
+							totalwithors = totalwithors+" or";
+						}
+						totalwithors = totalwithors+" "+String((total+(y*10)));
+						y=y+1;
+					}
+					console.log(totalwithors);
+					$("span#card-total").html("Your card total is"+totalwithors);
+					if (total>21){
+						setTimeout(function(){
+							var thing2 = confirm("Busted! Play again?");
+							if (thing2==true){
+								location.reload();
+							} else {
+								throw new Error('This is not an error. This is just to abort javascript');
+							}
+						})
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>
