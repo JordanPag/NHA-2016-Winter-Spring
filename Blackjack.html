@@ -20,7 +20,6 @@
 			</div>
 		</div>
 	</div>
-	Hover over your face down card to see it!<br>
 	<img id="2" src="" width="113px">
 	<img id="3" src="" width="113px">
 	<img id="4" src="" width="113px">
@@ -32,6 +31,7 @@
 	<img id="10" src="" width="113px">
 	<img id="11" src="" width="113px">
 	<br>
+	Hover over your face down card to see it!<br>
 	<button class="button1" id="get">Draw some cards</button>
 	<p id="hitorstay"></p>
 	<p id="buttonplace"></p>
@@ -50,7 +50,7 @@
 	<img id="comp11" src="" width="113px">
 	<script>
 		var playerresult = 0;
-		var compchange = "no";
+		var compchange = 0;
 		var comptotal = 0;
 		var compcard1image;
 		var compcardnum = 3;
@@ -127,7 +127,7 @@
 			console.log("Stay was clicked");
 			$("#stay").remove();
 			$("#hit").remove();
-			$("#hitorstay").html("");
+			$("#hitorstay").html("Please wait...");
 			if (change>0){
 				if (change>1){
 					if ((total+20)>21){
@@ -157,6 +157,7 @@
 					console.log(response);
 					document.getElementById("comp1").setAttribute("src","http://www.cheatersolitaire.com/Classic/RedBack.png");
 					document.getElementById("comp2").setAttribute("src",response.cards[1].image);
+					sleepforsleep(1000);
 					compcard1val = response.cards[0].value;
 					compcard2val = response.cards[1].value;
 					compcard1image = response.cards[0].image
@@ -165,54 +166,21 @@
 					}
 					if (compcard1val=="ACE"){
 						compcard1val=1;
-						compchange="yes"
+						compchange= compchange + 1;
 					}
 					if (compcard2val==0||compcard2val=="JACK"||compcard2val=="QUEEN"||compcard2val=="KING"){
 						compcard2val=10;
 					}
 					if (compcard2val=="ACE"){
 						compcard2val=1;
-						compchange="yes"
+						compchange= compchange + 1;
 					}
 					comptotal = Number(compcard1val) + Number(compcard2val);
 					console.log(comptotal);
+					sleepforsleep(1000);
 					while(compunder16<9){
-						if (comptotal>=16||((comptotal+10)>=16&&compchange=="yes")){
-							if (comptotal>=16){
-								if(comptotal>21){
-									compresult=0;
-								} else if (comptotal<=21){
-									compresult=comptotal;
-								}
-								compunder16=9;
-							} else if ((comptotal+10)>=16&&compchange=="yes") {
-								if ((comptotal+10)<=21){
-									compresult=comptotal+10;
-									compunder16=9;
-								} else if ((comptotal+10)>21){
-									while(comptotal<16){
-										$.ajax({
-											type: "GET",
-											url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
-											success: (response) => {
-												var compcardval = response.cards[0].value;
-												if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
-													compcardval=10;
-												}
-												if (compcardval=="ACE"){
-													compcardval=1;
-												var compcardimage = response.cards[0].image;
-												var compcardnumwithcomp = "comp" + compcardnum
-												document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
-												comptotal = comptotal + Number(compcardval);
-												}
-											}
-										})
-									}
-									compresult = total;
-									compunder16 = 9;
-								}
-							}
+						if (comptotal>=16||((comptotal+10)>=16&&compchange>0)||((comptotal+20)>=16&&compchange>1)){
+							compunder16 = 9;
 						} else {
 							$.ajax({
 								type:"GET",
@@ -224,55 +192,42 @@
 									}
 									if (compcardval=="ACE"){
 										compcardval=1;
-										compchange= "yes"
+										compchange= compchange+1;
+									}
 									var compcardimage = response.cards[0].image;
 									var compcardnumwithcomp = "comp"+compcardnum;
+									console.log(compcardnumwithcomp);
 									document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
 									comptotal = comptotal + Number(compcardval);
 									compcardnum = compcardnum + 1;
-									}
-									if (comptotal>=16||((comptotal+10)>=16&&compchange=="yes")){
-										if (comptotal>=16){
-											if(comptotal>21){
-												compresult=0;
-											} else if (comptotal<=21){
-												compresult=comptotal;
-											}
-											compunder16=9;
-										} else if ((comptotal+10)>=16&&compchange=="yes") {
-											if ((comptotal+10)<=21){
-												compresult=comptotal+10;
-												compunder16=9;
-											} else if ((comptotal+10)>21){
-												while(comptotal<16){
-													$.ajax({
-														type: "GET",
-														url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
-														success: (response) => {
-															var compcardval = response.cards[0].value;
-															if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
-																compcardval=10;
-															}
-															if (compcardval=="ACE"){
-																compcardval=1;
-															var compcardimage = response.cards[0].image;
-															var compcardnumwithcomp = "comp" + compcardnum
-															document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
-															comptotal = comptotal + Number(compcardval);
-															}
-														}
-													})
-												}
-												compresult = comptotal;
-												compunder16 = 9;
-											}
-										}
-									}
 								}
 							})
 						}
-						compunder16 = compunder16 + 1;
+						sleep(1000);
 					}
+					if (compchange>0){
+						if (compchange>1){
+							if ((comptotal+20)>21){
+								if (comptotal+10>21){
+									compresult = comptotal;
+								} else {
+									compresult = comptotal+10;
+								}
+							} else {
+								compresult = comptotal + 20;
+							}
+						} else {
+							if (total+10>21){
+								compresult = comptotal;
+							} else {
+								compresult = comptotal+10;
+							}
+						}
+					} else {
+						compresult = comptotal;
+					}
+					console.log("comptotal is "+comptotal);
+					console.log("compresult is "+compresult);
 					document.getElementById("comp1").setAttribute("src",compcard1image);
 					setTimeout(function(){
 						if (compresult>playerresult){
@@ -347,6 +302,25 @@
 					}
 				}
 			})
+		}
+		function sleep(milliseconds) {
+			var start = new Date().getTime();
+			for (var i = 0; i < 1000000000000000000; i++) {
+				if ((new Date().getTime() - start) > milliseconds){
+					break;
+				}
+			}
+			compunder16 = compunder16+1;
+			console.log("Sleep");
+		}
+		function sleepforsleep(milliseconds) {
+			var start = new Date().getTime();
+			for (var i = 0; i < 1000000000000000000; i++) {
+				if ((new Date().getTime() - start) > milliseconds){
+					break;
+				}
+			}
+			console.log("Sleep for sleep");
 		}
 	</script>
 </body>
