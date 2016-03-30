@@ -31,7 +31,8 @@
 	<img id="10" src="" width="113px">
 	<img id="11" src="" width="113px">
 	<br>
-	Hover over your face down card to see it!<br>
+	<p id="fake">Hover over your face down card to see it!</p>
+	<br>
 	<button class="button1" id="get">Draw some cards</button>
 	<p id="hitorstay"></p>
 	<p id="buttonplace"></p>
@@ -177,85 +178,44 @@
 					comptotal = Number(compcard1val) + Number(compcard2val);
 					console.log(comptotal);
 					sleepforsleep(1000);
-					console.log("compchange is "+compchange);
-					while(comptotal<16||((comptotal+10)<16&&compchange<=0)||((comptotal+20)<16&&compchange<=1)){
-						$.ajax({
-							type:"GET",
-							url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
-							success: (response) => {
-								console.log(response);
-								var compcardval = response.cards[0].value;
-								if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
-									compcardval=10;
-								}
-								if (compcardval=="ACE"){
-									compcardval=1;
-									compchange= compchange+1;
-								}
-								var compcardimage = response.cards[0].image;
-								var compcardnumwithcomp = "comp"+compcardnum;
-								console.log(compcardnumwithcomp);
-								document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
-								comptotal = comptotal + Number(compcardval);
-								console.log("comptotal is "+comptotal);
-								compcardnum = compcardnum + 1;
-							}
-						})
-					}
-					if (compchange>0){
-						if (compchange>1){
-							if ((comptotal+20)>21){
-								if (comptotal+10>21){
-									compresult = comptotal;
+					for (var i=0;i<9;i++){
+						if (comptotal>=16||((comptotal+10)>=16&&compchange>0)||((comptotal+20)>=16&&compchange>1)){
+							if ((comptotal+10)>=16&&compchange>0){
+								if ((comptotal+10)>21){
+									while (comptotal<16){
+										comphit();
+									}
+									end();
+									break;
 								} else {
-									compresult = comptotal+10;
+									end();
+									break;
+								}
+							} else if ((comptotal+20)>=16&&compchange>1){
+								if ((comptotal+20)>21){
+									if ((comptotal+10)>21){
+										while (comptotal<16){
+											comphit();
+										}
+										end();
+										break;
+									} else {
+										end();
+										break;
+									}
+								} else {
+									end();
+									break;
 								}
 							} else {
-								compresult = comptotal + 20;
+								end();
+								break;
 							}
 						} else {
-							if (total+10>21){
-								compresult = comptotal;
-							} else {
-								compresult = comptotal+10;
-							}
+							comphit();
 						}
-					} else {
-						if (comptotal>21){
-							compresult = 0;
-						} else {
-							compresult = comptotal;
-						}
+						sleepforsleep(500);
 					}
-					console.log("comptotal is "+comptotal);
-					console.log("compresult is "+compresult);
-					document.getElementById("comp1").setAttribute("src",compcard1image);
-					setTimeout(function(){
-						if (compresult>playerresult){
-							var thing4 = confirm("You lose! Play again?");
-							if (thing4==true){
-								location.reload();
-							} else {
-								throw new Error('This is not an error. This is just to abort javascript');
-							}
-						}
-						if (compresult<playerresult){
-							var thing5 = confirm("You win! Play again?");
-							if (thing5==true){
-								location.reload();
-							} else {
-								throw new Error('This is not an error. This is just to abort javascript');
-							}
-						}
-						if (compresult==playerresult){
-							var thing6 = confirm("You tied! Play again?");
-							if (thing6==true){
-								location.reload();
-							} else {
-								throw new Error('This is not an error. This is just to abort javascript');
-							}
-						}
-					},500)
 				}
 			})
 		}
@@ -312,6 +272,87 @@
 				}
 			}
 			console.log("Sleep for sleep");
+		}
+		function comphit(){
+			$.ajax({
+				type:"GET",
+				url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+				success: (response) => {
+					console.log(response);
+					var compcardval = response.cards[0].value;
+					if (compcardval==0||compcardval=="JACK"||compcardval=="QUEEN"||compcardval=="KING"){
+						compcardval=10;
+					}
+					if (compcardval=="ACE"){
+						compcardval=1;
+						compchange= compchange+1;
+					}
+					var compcardimage = response.cards[0].image;
+					var compcardnumwithcomp = "comp"+compcardnum;
+					console.log(compcardnumwithcomp);
+					document.getElementById(compcardnumwithcomp).setAttribute("src", compcardimage);
+					comptotal = comptotal + Number(compcardval);
+					console.log("comptotal is "+comptotal);
+					compcardnum = compcardnum + 1;
+				}
+			})
+		}
+		function end(){
+			console.log("compchange is "+compchange);
+			if (compchange>0){
+				if (compchange>1){
+					if ((comptotal+20)>21){
+						if (comptotal+10>21){
+							compresult = comptotal;
+						} else {
+							compresult = comptotal+10;
+						}
+					} else {
+						compresult = comptotal + 20;
+					}
+				} else {
+					if (total+10>21){
+						compresult = comptotal;
+					} else {
+						compresult = comptotal+10;
+					}
+				}
+			} else {
+				if (comptotal>21){
+					compresult = 0;
+				} else {
+					compresult = comptotal;
+				}
+			}
+			console.log("comptotal is "+comptotal);
+			console.log("compresult is "+compresult);
+			document.getElementById("comp1").setAttribute("src",compcard1image);
+			setTimeout(function(){
+				if (compresult>playerresult){
+					var thing4 = confirm("You lose! Play again?");
+					if (thing4==true){
+						location.reload();
+					} else {
+						throw new Error('This is not an error. This is just to abort javascript');
+					}
+				}
+				if (compresult<playerresult){
+					var thing5 = confirm("You win! Play again?");
+					if (thing5==true){
+						location.reload();
+					} else {
+						throw new Error('This is not an error. This is just to abort javascript');
+					}
+				}
+				if (compresult==playerresult){
+					var thing6 = confirm("You tied! Play again?");
+					if (thing6==true){
+						location.reload();
+					} else {
+						throw new Error('This is not an error. This is just to abort javascript');
+					}
+				}
+			},1000)
 		}
 	</script>
 </body>
