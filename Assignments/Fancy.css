@@ -1,0 +1,35 @@
+.button1 {
+	background-color:green;
+	border-radius:10px;
+	border:1px solid blue;
+	box-shadow:3px 3px 0px 0px blue;
+	cursor:pointer;
+	color:white;
+	padding:10px 20px;
+}
+.button1:hover {
+	background-color:red;
+}
+.button1:active {
+	position:relative;
+	top:2px;
+	left:2px;
+	box-shadow:1px 1px 0px 0px blue;
+}
+
+.button2 {
+	background-color:yellow;
+	border-radius:10px 0px;
+	border:1px solid green;
+	box-shadow:2px 2px 0px 0px green;
+	cursor:pointer;
+	color:black;
+	padding:5px 10px;
+}
+.button2:active {
+	position:relative;
+	top:1px;
+	left:1px;
+	box-shadow:1px 1px 0px 0px green;
+	background-color:#C7D501;
+}
