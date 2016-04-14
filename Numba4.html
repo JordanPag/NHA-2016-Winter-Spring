@@ -1,0 +1,42 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Problem numero 4</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<span class="pokemon-name"></span>
+		<ul class = "pokemon-abilities">
+		</ul>
+	</div>
+	<script>
+		$.ajax({
+			type: "GET",
+			url: "http://pokeapi.co/api/v2/pokemon/23/",
+			success: (response) => {
+				console.log(response);
+				$("span.pokemon-name").html(response.name);
+				for (i=0;i<response.abilities.length;i++){
+					$("ul.pokemon-abilities").append("<li id='"+response.abilities[i].url+"'>"+response.abilities[i].ability.name+"</li>");
+					if (i==0){
+						var ability = response.abilities[i].url;
+					} else if (i==1){
+						var ability2 = response.abilities[i].url;
+					} else if (i==2){
+						var ability3 = response.abilities[i].url;
+					}
+				}
+				$.ajax({
+					type: "GET",
+					url: ability,
+					success: (response){
+						//dafd
+					}
+				})
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Problem numero 2</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+	<label for="pokemon-name">Pokemon Name</label>
+	<input type="text" id="pokemon-name" />
+	<label for="pokemon-name">Pokemon Id</label>
+	<input type="text" id="pokemon-id" />
+	<label for="pokemon-name">Pokemon Type</label>
+	<input type="text" id="pokemon-type" />
+	<button>Submit</button>
+	<script>
+		$("button").click(function() {
+			var name = $("#pokemon-name").val();
+			var id = $("#pokemon-id").val();
+			var type = $("#pokemon-type").val();
+			console.log("Name: " + name);
+			console.log("Id: " + id);
+			console.log("Type: " + type);
+		})
+	</script>
+</body>
+</html>
