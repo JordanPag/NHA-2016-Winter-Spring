@@ -10,7 +10,7 @@ var change = 0;
 var cardnum = 3;
 $.ajax({
 	type: "GET",
-	url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/shuffle/",
+	url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/shuffle/",
 	success: (response) => {
 		console.log(response);
 	}
@@ -18,7 +18,7 @@ $.ajax({
 function start() {
 	$.ajax({
 		type: "GET",
-		url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=2",
+		url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=2",
 		success: (response) => {
 			console.log(response);
 			document.getElementById("x").innerHTML = "You have some cards now. ";
@@ -101,7 +101,7 @@ function stay(){
 	console.log("Playerresult is "+playerresult);
 	$.ajax({
 		type: "GET",
-		url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=2",
+		url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=2",
 		success: (response) => {
 			console.log(response);
 			document.getElementById("comp1").setAttribute("src","http://www.cheatersolitaire.com/Classic/RedBack.png");
@@ -133,7 +133,7 @@ function stay(){
 			} else {
 				$.ajax({
 					type: "GET",
-					url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+					url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 					success: (response) => {
 						console.log(response);
 						var compcard = "comp" + compcardnum;
@@ -154,7 +154,7 @@ function stay(){
 						} else {
 							$.ajax({
 								type: "GET",
-								url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+								url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 								success: (response) => {
 									console.log(response);
 									var compcard = "comp" + compcardnum;
@@ -175,7 +175,7 @@ function stay(){
 									} else {
 										$.ajax({
 											type: "GET",
-											url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+											url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 											success: (response) => {
 												console.log(response);
 												var compcard = "comp" + compcardnum;
@@ -196,7 +196,7 @@ function stay(){
 												} else {
 													$.ajax({
 														type: "GET",
-														url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+														url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 														success: (response) => {
 															console.log(response);
 															var compcard = "comp" + compcardnum;
@@ -217,7 +217,7 @@ function stay(){
 															} else {
 																$.ajax({
 																	type: "GET",
-																	url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+																	url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 																	success: (response) => {
 																		console.log(response);
 																		var compcard = "comp" + compcardnum;
@@ -238,7 +238,7 @@ function stay(){
 																		} else {
 																			$.ajax({
 																				type: "GET",
-																				url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+																				url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 																				success: (response) => {
 																					console.log(response);
 																					var compcard = "comp" + compcardnum;
@@ -259,7 +259,7 @@ function stay(){
 																					} else {
 																						$.ajax({
 																							type: "GET",
-																							url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+																							url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 																							success: (response) => {
 																								console.log(response);
 																								var compcard = "comp" + compcardnum;
@@ -280,7 +280,7 @@ function stay(){
 																								} else {
 																									$.ajax({
 																										type: "GET",
-																										url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+																										url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 																										success: (response) => {
 																											console.log(response);
 																											var compcard = "comp" + compcardnum;
@@ -326,7 +326,7 @@ function hit(){
 	console.log("Hit was clicked");
 	$.ajax({
 		type: "GET",
-		url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+		url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 		success: (response) => {
 			console.log(response);
 			var image = response.cards[0].image;
@@ -450,7 +450,7 @@ function endish2(){
 	} else {
 		$.ajax({
 			type: "GET",
-			url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+			url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 			success: (response) => {
 				console.log(response);
 				var compimage = response.cards[0].image;
@@ -472,7 +472,7 @@ function endish2(){
 				} else {
 					$.ajax({
 						type: "GET",
-						url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+						url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 						success: (response) => {
 							console.log(response);
 							var compimage = response.cards[0].image;
@@ -494,7 +494,7 @@ function endish2(){
 							} else {
 								$.ajax({
 									type: "GET",
-									url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+									url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 									success: (response) => {
 										console.log(response);
 										var compimage = response.cards[0].image;
@@ -516,7 +516,7 @@ function endish2(){
 										} else {
 											$.ajax({
 												type: "GET",
-												url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+												url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 												success: (response) => {
 													console.log(response);
 													var compimage = response.cards[0].image;
@@ -555,7 +555,7 @@ function endishish(){
 	} else {
 		$.ajax({
 			type: "GET",
-			url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+			url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 			success: (response) => {
 				console.log(response);
 				var compimage = response.cards[0].image;
@@ -578,7 +578,7 @@ function endishish(){
 				} else {
 					$.ajax({
 						type: "GET",
-						url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+						url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 						success: (response) => {
 							console.log(response);
 							var compimage = response.cards[0].image;
@@ -601,7 +601,7 @@ function endishish(){
 							} else {
 								$.ajax({
 									type: "GET",
-									url: "http://deckofcardsapi.com/api/deck/rdrk9f6k1bbp/draw/?count=1",
+									url: "http://deckofcardsapi.com/api/deck/0j8dn89uxl8k/draw/?count=1",
 									success: (response) => {
 										console.log(response);
 										var compimage = response.cards[0].image;
