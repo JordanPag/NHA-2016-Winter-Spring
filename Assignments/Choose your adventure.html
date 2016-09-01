@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Choose your adventure!</title>
+	</head>
+	<body>
+		<script>
+			var first = prompt("Hello.\nYou have been chosen to take a test. Will you accept?\n(please answer with yes or no)");
+			if (first == "no"){
+				var element = document.createElement("h1");
+				var text = document.createTextNode("Your result was: Someone who doesn't like taking tests");
+				element.appendChild(text);
+				document.body.appendChild(element);
+			}
+			else if (first == "yes"){
+				var second = prompt("Thank you. The first question is:\nWhen I am metal or wood, I help you get home.\nWhen I am flesh and blood, in the darkness I roam.\nWhat am I? (no caps, no punctuation)");
+				if (second == "bat"){
+					var element = document.createElement("h1");
+					var text = document.createTextNode("Your result was: Smart");
+					element.appendChild(text);
+					document.body.appendChild(element);
+				}
+				else{
+					var element = document.createElement("h1");
+					var text = document.createTextNode("Your result was: Not so smart");
+					element.appendChild(text);
+					document.body.appendChild(element);
+				}
+			}
+			else {
+				alert("You have not answered the question in the proper way. Please reload the page.")
+			}
+		</script>
+	</body>
+</html>
