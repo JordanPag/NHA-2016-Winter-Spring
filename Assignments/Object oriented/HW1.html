@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Inventory</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="HW1.js"></script>
+		<link type="text/css" rel="stylesheet" href="HW1.css">
+	</head>
+	<body>
+		<b>Name</b>
+		<br>
+		<input type="text" placeholder="chair" id="name"/>
+		<br>
+		<b>Price (in dollalrs)</b>
+		<br>
+		<input type="text" placeholder="12" id="price"/>
+		<br>
+		<form id="one">
+			<b>Choose Your Tags</b>
+			<br>
+			<input type="text" placeholder="home" id="1"/>
+			<br>
+		</form>
+		<button onclick="add();">+</button>
+		<br>
+		<form id="two">
+			<b>Choose Your Stores</b>
+			<br>
+			<input type="text" placeholder="walmart" id="100"/>
+			<br>
+		</form>
+		<button onclick="addstore();">+</button>
+		<br>
+	  <button onclick="save();">Submit</button>
+	  <br>
+		<button onclick="show();">Show Your Entries</button>
+		<div></div>
+	</body>
+</html>
