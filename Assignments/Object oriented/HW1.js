@@ -92,4 +92,3 @@ function show() {
 		}
 	})
 }
-//yay
