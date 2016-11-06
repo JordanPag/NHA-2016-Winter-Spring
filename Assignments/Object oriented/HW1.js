@@ -30,8 +30,15 @@ class Product {
 		this.name = name;
 		this.price = price;
 	}
+}
 
-	save () {
+class Inventory {
+	constructor () {
+
+	}
+
+	addProduct(newProduct){
+		//adds the product to sparkfun
 		$.ajax({
 			url: 'http://data.sparkfun.com/input/q5nngNQvJ0uJWYMLL03V',
 			headers: {
@@ -39,27 +46,17 @@ class Product {
 			},
 			method: 'POST',
 			dataType: 'json',
-			data: {name: this.name, tags: this.tags, stores: this.stores, price: this.price},
+			data: {name: newProduct.name, tags: newProduct.tags, stores: newProduct.stores, price: newProduct.price},
 			success: function(data) {
 				console.log('success: ' + data);
 				alert("Saved!");
 			}
 		})
 	}
-}
 
-class Inventory {
-    constructor () {
-
-    }
-
-    addProduct(newProduct){
-        //adds the product to sparkfun
-    }
-
-    showAllProducts() {
-        //shows all of the products from sparkfun
-        $.ajax({
+	showAllProducts() {
+		//shows all of the products from sparkfun
+		$.ajax({
 			type: "GET",
 			url: "https://data.sparkfun.com/output/q5nngNQvJ0uJWYMLL03V.json",
 			success: (response) => {
@@ -73,8 +70,7 @@ class Inventory {
 				alert("Please try again.");
 			}
 		})
-    }
-    
+	}
 }
 
 const invent = new Inventory();
@@ -95,7 +91,9 @@ function save() {
 	num = 1;
 	num2 = 100;
 	$("form#one").html("<b>Choose Your Tags</b><br><input type='text' placeholder='home' id='"+num+"'/><br>");
-	$("form#two").html("<b>Choose Your Stores</b><br><input type='text' placeholder='walmart' id='"+num2+"'/><br>")
+	$("form#two").html("<b>Choose Your Stores</b><br><input type='text' placeholder='walmart' id='"+num2+"'/><br>");
+	$("input#name").html("");
+	$("input#price").html("");
 	num += 1;
 	num2 += 1;
 	const product = new Product(tags,stores,name,price);
@@ -103,7 +101,7 @@ function save() {
 	console.log(product.stores);
 	console.log(product.name);
 	console.log(product.price);
-	product.save();
+	invent.addProduct(product);
 }
 
 function show() {
