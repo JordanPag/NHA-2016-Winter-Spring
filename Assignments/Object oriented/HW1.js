@@ -30,6 +30,22 @@ class Product {
 		this.name = name;
 		this.price = price;
 	}
+
+	save () {
+		$.ajax({
+			url: 'http://data.sparkfun.com/input/q5nngNQvJ0uJWYMLL03V',
+			headers: {
+				'Phant-Private-Key':'BVRRjJXlBWIPqJ6zzWng'
+			},
+			method: 'POST',
+			dataType: 'json',
+			data: {name: this.name, tags: this.tags, stores: this.stores, price: this.price},
+			success: function(data) {
+				console.log('success: ' + data);
+				alert("Saved!");
+			}
+		})
+	}
 }
 
 function save() {
@@ -56,22 +72,11 @@ function save() {
 	console.log(product.stores);
 	console.log(product.name);
 	console.log(product.price);
-	$.ajax({
-		url: 'http://data.sparkfun.com/input/q5nngNQvJ0uJWYMLL03V',
-		headers: {
-			'Phant-Private-Key':'BVRRjJXlBWIPqJ6zzWng'
-		},
-		method: 'POST',
-		dataType: 'json',
-		data: {name: product.name, tags: product.tags, stores: product.stores, price: product.price},
-		success: function(data) {
-			console.log('success: ' + data);
-			alert("Saved!");
-		}
-	})
+	product.save();
 }
 
 function show() {
+	const something = new Product("as","asdf","asfd","df");
 	$.ajax({
 		type: "GET",
 		url: "https://data.sparkfun.com/output/q5nngNQvJ0uJWYMLL03V.json",

@@ -1,0 +1,4 @@
+Private key: BVRRjJXlBWIPqJ6zzWng
+Public key: q5nngNQvJ0uJWYMLL03V
+Delete key: RvddYQN4y3TvZMxppXYL
+Logging link: http://data.sparkfun.com/input/q5nngNQvJ0uJWYMLL03V?private_key=BVRRjJXlBWIPqJ6zzWng&name=[value]&price=[value]&stores=[value]&tags=[value]
