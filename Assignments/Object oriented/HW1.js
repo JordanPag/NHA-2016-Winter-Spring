@@ -48,6 +48,37 @@ class Product {
 	}
 }
 
+class Inventory {
+    constructor () {
+
+    }
+
+    addProduct(newProduct){
+        //adds the product to sparkfun
+    }
+
+    showAllProducts() {
+        //shows all of the products from sparkfun
+        $.ajax({
+			type: "GET",
+			url: "https://data.sparkfun.com/output/q5nngNQvJ0uJWYMLL03V.json",
+			success: (response) => {
+				console.log(response);
+				$("div").html("<table style='width:500px'><tr><th>Name</th><th>Price</th><th>Tags</th><th>Stores</th></tr></table>");
+				for(let z=0;z<response.length;z++) {
+					$("table").append("<tr><td>"+response[z].name+"</td><td>$"+response[z].price+"</td><td>"+response[z].tags+"</td><td>"+response[z].stores+"</td></tr>");
+				}
+			},
+			error: function(request,error) {
+				alert("Please try again.");
+			}
+		})
+    }
+    
+}
+
+const invent = new Inventory();
+
 function save() {
 	var name = $("input#name").val();
 	var price = $("input#price").val();
@@ -76,20 +107,5 @@ function save() {
 }
 
 function show() {
-	const something = new Product("as","asdf","asfd","df");
-	$.ajax({
-		type: "GET",
-		url: "https://data.sparkfun.com/output/q5nngNQvJ0uJWYMLL03V.json",
-		success: (response) => {
-			console.log(response);
-			$("div").html("<table style='width:500px'><tr><th>Name</th><th>Price</th><th>Tags</th><th>Stores</th></tr></table>");
-			for(z=0;z<response.length;z++) {
-				$("table").append("<tr><td>"+response[z].name+"</td><td>$"+response[z].price+"</td><td>"+response[z].tags+"</td><td>"+response[z].stores+"</td></tr>");
-			}
-		},
-		error: function(request,error) {
-			alert("Please try again.");
-		}
-	})
+	invent.showAllProducts();
 }
-//yay
