@@ -2,11 +2,19 @@ CB.CloudApp.init('ayyuhziequij', 'e592ce9a-b29b-444c-b5b2-138f4572644f');
 
 class Product {
 	constructor(name, price) {
-		let product = new CB.CloudObject("Product");
-		product.set("name",name);
-		product.set("price",price);
+		this.name = name;
+		this.price = price;
 	}
-	save() {
+
+	api() {
+		const product = new CB.CloudObject("Product");
+		product.set("name",this.name);
+		product.set("price",this.price);
+		return product;
+	}
+
+	save(pro) {
+		let product = eval(pro);
 		product.save ({
 			success: (obj) =>{
 				console.log(obj);
@@ -16,6 +24,7 @@ class Product {
 			}
 		})
 	}
+
 	delete() {
 		product.delete({
 			success: (obj) =>{
@@ -31,17 +40,26 @@ class Product {
 class Store {
 	listAllProducts() {
 		let query = new CB.CloudQuery("Product");
-		var items = query;
+		query.find({
+			success: function(list){
+				console.log(list);
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		})
 	}
 }
 
 const add = () => {
 	var name = $("input#name").val();
 	var price = $("input#price").val();
-	console.log(name);
-	console.log(price);
-	var thing = new Product(name,price);
-	thing.save();
+	var save = confirm(`Are you sure you want to save a product with ${name} as the name and $${price} as the price?`);
+	const thing = new Product(name,price);
+	const product = thing.api();
+	console.log(product.get("name"));
+	console.log(product.get("price"));
+	thing.save(product);
 }
 
 /*let product = new CB.CloudObject("Product");
