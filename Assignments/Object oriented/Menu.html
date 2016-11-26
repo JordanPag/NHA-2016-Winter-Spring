@@ -9,14 +9,14 @@
 		<link rel="icon" type="image/ico" href="https://s-media-cache-ak0.pinimg.com/favicons/50c2b9014ae46d717d9c99ededf066afcaca89b95d39e30b0e68b750.ico?09fefbe0f2ba0da072ce787b73db9a9d">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script src="Final_Project.js"></script>
+		<script src="Final_Project_ingredient.js"></script>
 		<script src="Final_Project_food.js"></script>
+		<script src="Final_Project.js"></script>
 		<script src="Final_Project_order.js"></script>
 		<script src="Final_Project_customer.js"></script>
-		<script src="Final_Project_application.js"></script>
 	</head>
-	<body style="font-family: 'Lora', serif">
-		<nav class="navbar navbar-default" style="background-color: #99ffa4;">
+	<body style="font-family: 'Lora', serif; padding-top: 70px; padding-bottom: 60px;">
+		<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #99ffa4;">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -26,7 +26,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="Final_Project.html"><img width="40" style="position: relative; top: -10px;" src="https://cdn0.iconfinder.com/data/icons/kameleon-free-pack-rounded/110/Food-Dome-512.png"/></a>
+		      <a class="navbar-brand" href="Final_Project_in.html"><img width="40" style="position: relative; top: -10px;" src="https://cdn0.iconfinder.com/data/icons/kameleon-free-pack-rounded/110/Food-Dome-512.png"/></a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,17 +35,108 @@
 		        <li style="background-color: #7dd187;"><a href="Menu.html" style="color: #ff0000;">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="cart.html" style="color: #ff0000;">Checkout</a></li>
+		        <li><a href="cart.html" style="color: #ff0000;">Checkout &nbsp;<span class="badge" id="foods" style="background-color:red;"></span></a></li>
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #ff0000;">Profile<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="Signin.html" style="color: black;">Sign In</a></li>
-		            <li><a href="Signup.html" style="color: black;">Sign Up</a></li>
+		            <li><a href="Signin.html" style="color: black;">Sign Out</a></li>
 		          </ul>
 		        </li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
+		<center id="menu">
+			<h1 id="header">It's <span id="day"></span>. Time for some special foods!</h1>
+			<!-- Modals -->
+			<div class="modal fade bd-example-modal-lg" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h2 class="modal-title" id="myModalLabel" duck="0"></h2>
+			      </div>
+			      <div class="modal-body">
+			        <h4><u>Ingredients</u></h4>
+			        <center>
+			        	<table id="ingredients0" style="maxlength: 300px;">
+			        	</table>
+			        </center>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade bd-example-modal-lg" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h2 class="modal-title" id="myModalLabel" duck="1"></h2>
+			      </div>
+			      <div class="modal-body">
+			        <h4><u>Ingredients</u></h4>
+			        <center>
+			        	<table id="ingredients1" style="width: 300px;">
+			        	</table>
+			        </center>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade bd-example-modal-lg" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h2 class="modal-title" id="myModalLabel" duck="2"></h2>
+			      </div>
+			      <div class="modal-body">
+			        <h4><u>Ingredients</u></h4>
+			        <center>
+			        	<table id="ingredients2" style="width: 300px;">
+			        	</table>
+			        </center>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade bd-example-modal-lg" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h2 class="modal-title" id="myModalLabel" duck="3"></h2>
+			      </div>
+			      <div class="modal-body">
+			        <h4><u>Ingredients</u></h4>
+			        <center>
+			        	<table id="ingredients3" style="width: 300px;">
+			        	</table>
+			        </center>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</center>
 	</body>
 </html>

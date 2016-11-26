@@ -10,10 +10,10 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script src="Final_Project.js"></script>
+		<script src="Final_Project_ingredient.js"></script>
 		<script src="Final_Project_food.js"></script>
 		<script src="Final_Project_order.js"></script>
 		<script src="Final_Project_customer.js"></script>
-		<script src="Final_Project_application.js"></script>
 	</head>
 	<body style="font-family: 'Lora', serif">
 		<nav class="navbar navbar-default" style="background-color: #99ffa4;">
@@ -32,10 +32,10 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="Menu.html" style="color: #ff0000;">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
+		        <li><a href="Signin.html" style="color: #ff0000;">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="cart.html" style="color: #ff0000;">Checkout</a></li>
+		        <li><a href="Signin.html" style="color: #ff0000;">Checkout</a></li>
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #ff0000;">Profile<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
@@ -47,5 +47,13 @@
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
+		<center>
+			<p style="font-size: 50px;">Sign In</p>
+			<input id="username" style="width: 250px" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+			<br>
+			<input id="password" style="width: 250px" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+			<br>
+			<button type="button" class="btn btn-primary" onclick="login();">Login</button>
+		</center>
 	</body>
 </html>
