@@ -11,19 +11,6 @@ class food {
 	}
 }
 
-var d = new Date();
-var weekday = new Array(7);
-weekday[0]=  "Sunday";
-weekday[1] = "Monday";
-weekday[2] = "Tuesday";
-weekday[3] = "Wednesday";
-weekday[4] = "Thursday";
-weekday[5] = "Friday";
-weekday[6] = "Saturday";
-
-var n = weekday[d.getDay()];
-console.log(n);
-
 //Saturday meals
 const steak = new food([Steak,Pepper,Salt],"Saturday","Steak",17,[Broccoli,Rice_Pilaf],"steak");
 const honeyMustardChicken = new food([Chicken,Honey,Mustard,Olive_Oil,Pepper],"Saturday","Honey Mustard Chicken",16,[Broccoli,Farro],"honeyMustardChicken");
@@ -32,13 +19,13 @@ const chilli = new food([Ground_Beef,Bell_Peppers,Jalapeno_Peppers,Kidney_Beans,
 const Saturday = [steak,honeyMustardChicken,broccoliPie,chilli];
 
 //Sunday meals
-const stuffedShells = new food([],"Sunday","Stuffed Shells",1,[],"stuffedShells");
-const chickenArabiata = new food([],"Sunday","Chicken Arabiata",1,[],"chickenArabiata");
-const chickenParmesean = new food([],"Sunday","Chicken Parmesean",1,[],"chickenParmesean");
+const stuffedShells = new food([Shells,Ricotta_Cheese,Mozzarella_Cheese,Parmesean_Cheese,Eggs,Salt,Pepper,Nutmeg,Tomato_Sauce],"Sunday","Stuffed Shells",14,"None","stuffedShells");
+const chickenArabiata = new food([Chicken,Potatoes,Mushrooms,Jalapeno_Peppers,Balsamic_Vinegar,Salt,Pepper,Rosemary],"Sunday","Chicken Arabiata",16,[Corn],"chickenArabiata");
+const chickenParmesean = new food([Chicken,Tomato_Sauce,Bread_Crumbs,Parmesean_Cheese,Salt,Pepper,Parsley,Flour,Eggs,Milk],"Sunday","Chicken Parmesean",16,[Spaghetti,Corn],"chickenParmesean");
 const Sunday = [stuffedShells,chickenArabiata,chickenParmesean];
 
 //Monday meals
-const tunaCasserole = new food([],"Monday","Tuna Casserole",1,[],"tunaCasserole");
+const tunaCasserole = new food([Tuna,Macaroni,Cream_of_Celery,Cheddar_Cheese,Onion_Powder,Parsley,Peas],"Monday","Tuna Casserole",1,"None","tunaCasserole");
 const tilapia = new food([],"Monday","Tilapia",1,[],"tilapia");
 const shrimp = new food([],"Monday","Shrimp and Pasta",1,[],"shrimp");
 const salmon = new food([],"Monday","Salmon",1,[],"salmon");

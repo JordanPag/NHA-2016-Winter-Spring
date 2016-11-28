@@ -1,0 +1,60 @@
+mark {
+	background: rgba(206,206,206,0.5);
+}
+
+body {
+	font-family: "Lora", sans-serif;
+	background-size: cover; 
+	background-repeat: no-repeat;
+}
+
+body#image {
+	background-image: url("http://trichilofoods.com/site/wp-content/uploads/2015/06/veggies.jpg");
+}
+
+.navbar-default {
+	background-color: #99ffa4;
+}
+
+.navbar-brand {
+	position: relative;
+	top: -10px;
+}
+
+.jumbotron {
+	background-color: transparent;
+}
+
+#red {
+	color: #ff0000;
+}
+
+#black {
+	color: black;
+}
+
+#map {
+	width:100%;
+	height: 500px;
+}
+
+#active {
+	background-color: #7dd187;
+}
+
+#fixtop {
+	padding-top: 70px;
+	padding-bottom: 60px;
+}
+
+.badge {
+	background-color: red;
+}
+
+.form-control {
+	width: 250px;
+}
+
+#sign {
+	font-size: 50px;
+}

@@ -14,9 +14,10 @@
 		<script src="Final_Project_food.js"></script>
 		<script src="Final_Project_order.js"></script>
 		<script src="Final_Project_customer.js"></script>
+		<link rel="stylesheet" type="text/css" href="Final_Project.css">
 	</head>
-	<body style="font-family: 'Lora', serif">
-		<nav class="navbar navbar-default" style="background-color: #99ffa4;">
+	<body>
+		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -26,21 +27,21 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="Final_Project.html"><img width="40" style="position: relative; top: -10px;" src="https://cdn0.iconfinder.com/data/icons/kameleon-free-pack-rounded/110/Food-Dome-512.png"/></a>
+		      <a class="navbar-brand" href="Final_Project.html"><img width="40" src="https://cdn0.iconfinder.com/data/icons/kameleon-free-pack-rounded/110/Food-Dome-512.png"/></a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="Signin.html" style="color: #ff0000;">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
+		        <li><a href="Signin.html" id="red">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="Signin.html" style="color: #ff0000;">Checkout</a></li>
+		        <li><a href="Signin.html" id="red">Checkout</a></li>
 		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #ff0000;">Profile<span class="caret"></span></a>
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="red">Profile<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="Signin.html" style="color: black;">Sign In</a></li>
-		            <li><a href="Signup.html" style="color: black;">Sign Up</a></li>
+		            <li><a href="Signin.html" id="black">Sign In</a></li>
+		            <li><a href="Signup.html" id="black">Sign Up</a></li>
 		          </ul>
 		        </li>
 		      </ul>
@@ -48,10 +49,10 @@
 		  </div><!-- /.container-fluid -->
 		</nav>
 		<center>
-			<p style="font-size: 50px;">Sign In</p>
-			<input id="username" style="width: 250px" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+			<p id="sign">Sign In</p>
+			<input id="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
 			<br>
-			<input id="password" style="width: 250px" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+			<input id="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
 			<br>
 			<button type="button" class="btn btn-primary" onclick="login();">Login</button>
 		</center>

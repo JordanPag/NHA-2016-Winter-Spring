@@ -17,12 +17,10 @@
 		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet'/>
-    <style>
-    	#map { width:100%; height: 500px; }
-    </style>
+		<link rel="stylesheet" type="text/css" href="Final_Project.css">
 	</head>
-	<body style="font-family: 'Lora', serif margin-bottom: 100px;">
-		<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #99ffa4;">
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 		  	<!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -32,20 +30,20 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="Final_Project_in.html"><img width="40" style="position: relative; top: -10px;" src="https://cdn0.iconfinder.com/data/icons/kameleon-free-pack-rounded/110/Food-Dome-512.png"/></a>
+		      <a class="navbar-brand" href="Final_Project_in.html"><img width="40" src="https://cdn0.iconfinder.com/data/icons/kameleon-free-pack-rounded/110/Food-Dome-512.png"/></a>
 		    </div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		    	<ul class="nav navbar-nav">
-						<li><a href="Menu.html" style="color: #ff0000;">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
+						<li><a href="Menu.html" id="red">Menu <span class="glyphicon glyphicon-list-alt"/></a></li>
 		  	  </ul>
 		      <ul class="nav navbar-nav navbar-right">
-						<li style="background-color: #7dd187"><a href="cart.html" style="color: #ff0000;">Checkout</a></li>
+						<li id="active"><a href="cart.html" id="red">Checkout</a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #ff0000;">Profile<span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="red">Profile<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="Signin.html" style="color: black;">Sign Out</a></li>
+								<li><a href="Signin.html" id="black">Sign Out</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -53,7 +51,7 @@
 			</div><!-- /.container-fluid -->
 		</nav>
 		<center>
-			<div class="jumbotron" style="background-color: transparent;">
+			<div class="jumbotron">
 				<h1>Checkout</h1>
 				<br>
 				<br>

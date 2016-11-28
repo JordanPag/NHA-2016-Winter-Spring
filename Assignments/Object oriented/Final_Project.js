@@ -1,6 +1,17 @@
 CB.CloudApp.init('yegguroxoyua', '47345f24-5127-4318-abd3-b054fe11a2a2');
 
-var length;
+var d = new Date();
+var weekday = new Array(7);
+weekday[0]=  "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+var n = weekday[d.getDay()];
+console.log(n);
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -25,14 +36,13 @@ function login() {
 }
 
 window.onload = function(){
+	n = "Sunday";
 	//Menu.html
 	var query = new CB.CloudQuery("order");
 	query.find({
 		success: function(list){
-			console.log(list);
-			length = list.length;
-			if(length>0){
-				$("span#foods").html(length);
+			if(list.length>0){
+				$("span#foods").html(list.length);
 			} else {
 				$("span#foods").html("");
 			}
@@ -42,7 +52,7 @@ window.onload = function(){
 		}
 	})
 	if(n=="Friday"){
-		$("h1#header").html("Sorry! We're closed on Fridays.")
+		$("h1#header").html("Sorry! We're closed on Fridays.");
 	} else {
 		$("span#day").html(n);
 	}
@@ -63,26 +73,20 @@ window.onload = function(){
 			$("center#menu").append(`<br><br><br><br><h3>${item}</h3><button type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#myModal${x}'>Details</button><button type='button' class='btn btn-primary btn-lg' onclick='buy("${day[x].codeName}");'>I want this &nbsp;$${day[x].price}</button>`);
 			$("h2[duck="+x+"]").append(item);
 			for(let z=0;z<day[x].ingredients.length;z++){
-				$("table#ingredients"+x).append(`<td style="padding: 5px;"><img src='${day[x].ingredients[z].image}' data-toggle="tooltip" data-placement="top" title="${day[x].ingredients[z].name}" style='height: 55px;'></img></td>`);
+				$("table#ingredients"+x).append(`<td style="padding: 5px;"><figure><img src='${day[x].ingredients[z].image}' data-toggle="tooltip" data-placement="top" title="${day[x].ingredients[z].name}" style='height: 55px;'></img><figcaption class="center-block"><b>${day[x].ingredients[z].name}</b></figcaption></figure></td>`);
+			}
+			if(day[x].sides=="None"){
+				$("table#sides"+x).append("No sides for this meal.")
+			} else {
+				for(let z=0;z<day[x].sides.length;z++){
+					$("table#sides"+x).append(`<td style="padding: 5px;"><figure><img src='${day[x].sides[z].image}' data-toggle="tooltip" data-placement="top" title="${day[x].sides[z].name}" style="height: 55px;"></img><figcaption class="center-block"><b>${day[x].sides[z].name}</b></figcaption></figure></td>`);
+				}
 			}
 		}
 	}
 	//Cart.html
-	var query = new CB.CloudQuery("order");
-	query.find({
-		success: function(listorder){
-			console.log(listorder);
-			var price = 0;
-			for(let x=0;x<listorder.length;x++){
-				price += parseInt(listorder[x].get("price"),10);
-				$("tbody#order").append(`<tr id="${x}"><td></td><td>${listorder[x].get("food")}</td><td>$${listorder[x].get("price")}</td><td><button class="btn btn-primary" onclick="del(${x});">X</button></td></tr>`);
-			}
-			$("tbody#order").append(`<tr><th scope='row'>Total</th><td></td><td>$${price}</td></tr>`)
-		},
-		error: function(err){
-			alert(err);
-		}
-	})
+	const ord = new order();
+	ord.getFoods();
 }
 
 function buy(food){
@@ -237,21 +241,27 @@ function deliverTo() {
 }
 
 function finish(){
+	var num = 0;
 	var query = new CB.CloudQuery("order");
 	query.find({
 		success: function(list){
 			for(let x=0;x<list.length;x++){
 				var item = list[x];
+				console.log(item);
 				item.delete({
 					success: function(obj){
 						console.log("deleted");
+						num += 1;
+						if(num==list.length){
+							console.log("ready to go");
+							window.location.href = "Final_Project_in.html";
+						}
 					},
 					error: function(err){
-						alert(err);
+						alert("Error deleting the object");
 					}
 				})
 			}
-			window.location.href = "Final_Project_in.html";
 		},
 		error: function(err){
 			alert(err);
