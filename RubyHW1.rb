@@ -23,8 +23,8 @@ CSV.open("HW1fixed.csv", "wb") do |file|
 			if lin.size == 11
 				fix1 = lin[0]
 				fix2 = lin[1] + lin[2] + lin[3]
-				fix3 = lin[4] + lin[3] + lin[6]
-				fix4 = lin[5] + lin[6] + lin[9] + lin[10]
+				fix3 = lin[4] + lin[5] + lin[6]
+				fix4 = lin[7] + lin[8] + lin[9] + lin[10]
 				file << ["#{fix1}-#{fix2}-#{fix3}-#{fix4}"]
 			end
 		end
