@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+  	<title></title>
+		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+		<style>
+			body { margin:0; padding:0; }
+			#map { width:500px; height: 200px; }
+		</style>
+	</head>
+	<body>
+		<div id='map'></div>
+		<script>
+			mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGFucGFnIiwiYSI6ImNpdnlnaWwyeDAyNjUzMHBkNTV4eW54eWEifQ.-WXowLd6fVd8kF3O9pAPcw';
+			var map = new mapboxgl.Map({
+				container: 'map', // container id
+				style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
+				center: [-73.984874,40.744683], // starting position
+				zoom: 12 // starting zoom
+			});
+			
+			map.on('load', function () {
+		    map.addSource("points", {
+		        "type": "geojson",
+		        "data": {
+	            "type": "FeatureCollection",
+	            "features": [{
+	                "type": "Feature",
+	                "geometry": {
+	                    "type": "Point",
+	                    "coordinates": [-73.984874,40.744683]
+	                },
+	                "properties": {
+	                    "title": "Our Location",
+	                    "icon": "monument"
+	                }
+	            }]
+		        }
+		    });
+
+		    map.addLayer({
+		        "id": "points",
+		        "type": "symbol",
+		        "source": "points",
+		        "layout": {
+		            "icon-image": "{icon}-15",
+		            "text-field": "{title}",
+		            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+		            "text-offset": [0, 0.6],
+		            "text-anchor": "top"
+		        }
+		    });
+		  });
+		</script>
+	</body>
+</html>
