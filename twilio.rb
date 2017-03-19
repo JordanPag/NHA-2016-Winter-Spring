@@ -12,5 +12,5 @@ auth_token = '400a7dd3a323fb0dc5c72a8803f722be'
 @account.messages.create(
   from: '+19176344130',
   to: '9174503711',
-  body: ''
+  body: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY'
 )
