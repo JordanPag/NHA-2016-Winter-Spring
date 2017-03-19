@@ -48,3 +48,7 @@ Temporary Items
 
 # Ruby 2.3.3
 /Ruby23/
+
+
+.env
+*.sw[A-Za-z]
