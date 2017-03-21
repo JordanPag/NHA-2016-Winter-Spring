@@ -7,7 +7,7 @@ session = GoogleDrive::Session.from_config("config.json")
 
 
 sheet = session.spreadsheet_by_key("1REau9FnyfO5qXs3kYBsXIPlAJquszUV1u7TAQJ09kEQ")
-ws = sheet.worksheets[0]
+ws = sheet.worksheets[2]
 
 places = []
 farmerplace = 0
