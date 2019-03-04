@@ -1,4 +1,4 @@
-var deck = "14xawc3po7sh"; //you can change this if the program doesn't work
+var deck = "x80xktr9pc5p"; //you can change this if the program doesn't work
 var playerresult = 0;
 var compchange = 0;
 var comptotal = 0;
